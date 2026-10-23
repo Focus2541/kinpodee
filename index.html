@@ -443,6 +443,150 @@ const FOODS = [
  ["ข้าวเหนียวมะม่วง","1 จาน",450,6,80,13,"ผลไม้/ขนม"],
  ["บัวลอยไข่หวาน","1 ถ้วย",340,6,50,13,"ผลไม้/ขนม"]
 ];
+// ---- more foods (approx. per serving) — cafe drinks, bakery, rice/noodle dishes, sides, snacks
+FOODS.push(
+ ["มัทฉะลาเต้ (เย็น)","1 แก้ว 16 ออนซ์",250,8,35,9,"เครื่องดื่ม"],
+ ["มัทฉะลาเต้ (ร้อน)","1 แก้ว",180,7,24,6,"เครื่องดื่ม"],
+ ["มัทฉะลาเต้ หวานน้อย","1 แก้ว 16 ออนซ์",190,8,22,8,"เครื่องดื่ม"],
+ ["ชาเขียวนมเย็น","1 แก้ว",240,4,40,7,"เครื่องดื่ม"],
+ ["ลาเต้เย็น","1 แก้ว 16 ออนซ์",180,8,22,7,"เครื่องดื่ม"],
+ ["ลาเต้ร้อน","1 แก้ว",150,8,14,7,"เครื่องดื่ม"],
+ ["คาปูชิโน่","1 แก้ว",130,7,12,6,"เครื่องดื่ม"],
+ ["มอคค่าเย็น","1 แก้ว 16 ออนซ์",290,8,42,10,"เครื่องดื่ม"],
+ ["เอสเปรสโซ่เย็น","1 แก้ว",230,5,38,7,"เครื่องดื่ม"],
+ ["อเมริกาโน่เย็น หวาน","1 แก้ว",90,0.3,23,0,"เครื่องดื่ม"],
+ ["กาแฟดำร้อน","1 แก้ว",5,0.3,0,0,"เครื่องดื่ม"],
+ ["กาแฟ 3in1","1 ซอง",110,1,18,4,"เครื่องดื่ม"],
+ ["โกโก้เย็น","1 แก้ว",280,7,45,8,"เครื่องดื่ม"],
+ ["ไมโล/โอวัลตินเย็น","1 แก้ว",220,6,38,5,"เครื่องดื่ม"],
+ ["นมชมพู (นมเย็น)","1 แก้ว",260,8,40,7,"เครื่องดื่ม"],
+ ["ชานมไข่มุก","1 แก้ว",350,3,65,9,"เครื่องดื่ม"],
+ ["ชามะนาว","1 แก้ว",150,0,37,0,"เครื่องดื่ม"],
+ ["ชาเขียวขวด","1 ขวด 500 มล.",130,0,32,0,"เครื่องดื่ม"],
+ ["น้ำส้มคั้น","1 แก้ว",110,1.7,26,0.5,"เครื่องดื่ม"],
+ ["น้ำมะพร้าว","1 แก้ว",60,0.7,14,0.5,"เครื่องดื่ม"],
+ ["โอเลี้ยง","1 แก้ว",120,0.3,30,0,"เครื่องดื่ม"],
+ ["สมูทตี้ผลไม้","1 แก้ว",200,2,48,0.5,"เครื่องดื่ม"],
+ ["นมเปรี้ยว (ขวดเล็ก)","1 ขวด",50,0.8,11,0,"เครื่องดื่ม"],
+ ["โยเกิร์ตรสธรรมชาติ","1 ถ้วย",100,6,9,4.5,"เครื่องดื่ม"],
+ ["เวย์โปรตีน","1 สกู๊ป",120,24,3,1.5,"เครื่องดื่ม"],
+ ["เบียร์","1 กระป๋อง 330 มล.",145,1.5,13,0,"เครื่องดื่ม"],
+ ["ข้าวหมูกระเทียม","1 จาน",550,22,70,20,"จานเดียว"],
+ ["ข้าวไก่กระเทียม","1 จาน",520,24,68,17,"จานเดียว"],
+ ["ข้าวผัดอเมริกัน","1 จาน",790,26,90,36,"จานเดียว"],
+ ["ข้าวหน้าเป็ด","1 จาน",495,22,68,15,"จานเดียว"],
+ ["ข้าวหมกไก่","1 จาน",535,24,70,18,"จานเดียว"],
+ ["ข้าวไข่ข้นกุ้ง","1 จาน",500,18,60,20,"จานเดียว"],
+ ["ข้าวมันไก่ทอด","1 จาน",690,26,78,30,"จานเดียว"],
+ ["ข้าวผัดปู","1 จาน",520,18,72,17,"จานเดียว"],
+ ["ข้าวราดแกงเขียวหวาน","1 จาน",520,18,70,19,"จานเดียว"],
+ ["ข้าวคะน้าหมูกรอบ","1 จาน",690,20,70,37,"จานเดียว"],
+ ["ข้าวผัดพริกแกงหมู","1 จาน",560,22,68,22,"จานเดียว"],
+ ["ข้าวแกงกะหรี่ไก่","1 จาน",650,22,90,22,"จานเดียว"],
+ ["ข้าวไข่เจียวหมูสับ","1 จาน",580,20,55,30,"จานเดียว"],
+ ["ข้าวต้มกุ้ง","1 ชาม",210,14,30,3,"จานเดียว"],
+ ["ข้าวหน้าหมูทอดทงคัตสึ","1 จาน",800,30,90,34,"จานเดียว"],
+ ["ข้าวปั้น (โอนิกิริ)","1 ก้อน",180,4,38,1,"ข้าว/แป้ง"],
+ ["ก๋วยเตี๋ยวเรือ","1 ชามเล็ก",180,10,22,6,"เส้น"],
+ ["เย็นตาโฟ","1 ชาม",350,15,45,12,"เส้น"],
+ ["สุกี้น้ำ","1 ชาม",320,20,35,10,"เส้น"],
+ ["สุกี้แห้ง","1 จาน",400,22,45,14,"เส้น"],
+ ["มาม่าต้มยำ","1 ห่อ",350,7,48,15,"เส้น"],
+ ["ผัดมาม่า","1 จาน",480,12,55,23,"เส้น"],
+ ["ก๋วยจั๊บ","1 ชาม",400,18,50,14,"เส้น"],
+ ["บะหมี่หมูแดงแห้ง","1 ชาม",380,18,50,12,"เส้น"],
+ ["ก๋วยเตี๋ยวคั่วไก่","1 จาน",560,20,60,26,"เส้น"],
+ ["ขนมจีนน้ำเงี้ยว","1 จาน",340,16,50,8,"เส้น"],
+ ["ขนมจีนแกงเขียวหวาน","1 จาน",420,16,55,15,"เส้น"],
+ ["ราเมง","1 ชาม",550,22,70,20,"เส้น"],
+ ["สปาเกตตีคาโบนาร่า","1 จาน",700,25,75,33,"เส้น"],
+ ["สปาเกตตีขี้เมา","1 จาน",520,20,70,18,"เส้น"],
+ ["ตำข้าวโพด","1 จาน",160,4,30,4,"กับข้าว"],
+ ["ตำผลไม้","1 จาน",140,2,32,1,"กับข้าว"],
+ ["ยำวุ้นเส้น","1 จาน",250,15,25,9,"กับข้าว"],
+ ["ยำมาม่า","1 จาน",300,10,40,11,"กับข้าว"],
+ ["ลาบไก่","1 จาน",180,20,6,8,"กับข้าว"],
+ ["น้ำตกหมู","1 จาน",220,22,6,12,"กับข้าว"],
+ ["คอหมูย่าง","100 ก.",330,20,3,27,"กับข้าว"],
+ ["หมูทอด","100 ก.",330,26,8,21,"กับข้าว"],
+ ["ไก่ทอด","1 ชิ้น",280,18,10,18,"กับข้าว"],
+ ["ปีกไก่ทอด","1 ชิ้น",150,11,5,10,"กับข้าว"],
+ ["ไข่พะโล้","1 ถ้วย",260,18,12,15,"กับข้าว"],
+ ["ต้มจืดเต้าหู้หมูสับ","1 ถ้วย",140,12,6,7,"กับข้าว"],
+ ["แกงส้ม","1 ถ้วย",120,12,10,3,"กับข้าว"],
+ ["พะแนงหมู","1 ถ้วย",340,18,10,25,"กับข้าว"],
+ ["ผัดกะเพราหมูสับ (กับข้าว)","1 จาน",280,20,8,19,"กับข้าว"],
+ ["ผัดผักรวม","1 จาน",150,5,12,9,"กับข้าว"],
+ ["ไก่ผัดเม็ดมะม่วง","1 จาน",400,25,20,25,"กับข้าว"],
+ ["ปลาทอด","1 ตัว",300,35,2,17,"กับข้าว"],
+ ["ปลานึ่งมะนาว","1 ตัว",220,35,8,5,"กับข้าว"],
+ ["ปลาเผา","1 ตัว",250,45,0,7,"กับข้าว"],
+ ["กุ้งเผา","100 ก.",100,21,0,1.5,"กับข้าว"],
+ ["ทอดมันปลา","5 ชิ้น",300,15,20,18,"กับข้าว"],
+ ["ไส้กรอกอีสาน","1 ไม้",150,6,8,10,"กับข้าว"],
+ ["ลูกชิ้นปิ้ง","1 ไม้",90,6,8,4,"กับข้าว"],
+ ["แคบหมู","30 ก.",160,9,0,14,"กับข้าว"],
+ ["น้ำพริกอ่อง","1 ถ้วย",180,10,8,12,"กับข้าว"],
+ ["ไข่ตุ๋น","1 ถ้วย",110,8,2,7,"กับข้าว"],
+ ["เต้าหู้ทอด","5 ชิ้น",200,10,6,15,"กับข้าว"],
+ ["หมูกระทะ","1 คน",900,50,40,60,"กับข้าว"],
+ ["ชาบู","1 คน",700,45,55,30,"กับข้าว"],
+ ["สลัดผัก น้ำสลัดใส","1 จาน",120,3,12,7,"กับข้าว"],
+ ["สลัดอกไก่","1 จาน",280,30,12,12,"กับข้าว"],
+ ["อกไก่นุ่ม (ซอง)","1 ชิ้น",90,19,1,1,"กับข้าว"],
+ ["ข้าวไรซ์เบอร์รี่","1 ทัพพี",85,2,18,0.8,"ข้าว/แป้ง"],
+ ["ขนมปังขาว","1 แผ่น",75,2.5,14,1,"ข้าว/แป้ง"],
+ ["ข้าวโพดต้ม","1 ฝัก",120,4,27,1.5,"ข้าว/แป้ง"],
+ ["มันเทศเผา","1 หัวกลาง",115,2,27,0.1,"ข้าว/แป้ง"],
+ ["ข้าวโอ๊ต","40 ก.",150,5,27,3,"ข้าว/แป้ง"],
+ ["ซาลาเปาหมูสับ","1 ลูก",230,9,35,6,"ข้าว/แป้ง"],
+ ["ขนมจีบ","4 ชิ้น",200,10,16,10,"ข้าว/แป้ง"],
+ ["เกี๊ยวซ่า","5 ชิ้น",230,10,22,11,"ข้าว/แป้ง"],
+ ["ซูชิ","1 คำ",50,2,9,0.5,"ข้าว/แป้ง"],
+ ["แซนด์วิชแฮมชีส","1 ชิ้น",300,13,30,14,"ข้าว/แป้ง"],
+ ["พิซซ่า","1 ชิ้น",280,12,33,11,"ข้าว/แป้ง"],
+ ["แฮมเบอร์เกอร์","1 ชิ้น",300,15,33,13,"ข้าว/แป้ง"],
+ ["เฟรนช์ฟรายส์","1 ที่กลาง",330,4,43,16,"ข้าว/แป้ง"],
+ ["ครัวซองต์","1 ชิ้น",230,5,26,12,"ผลไม้/ขนม"],
+ ["เค้กช็อกโกแลต","1 ชิ้น",350,5,45,17,"ผลไม้/ขนม"],
+ ["ชีสเค้ก","1 ชิ้น",320,6,26,22,"ผลไม้/ขนม"],
+ ["บราวนี่","1 ชิ้น",230,3,30,11,"ผลไม้/ขนม"],
+ ["โดนัท","1 ชิ้น",250,4,30,13,"ผลไม้/ขนม"],
+ ["ขนมปังสังขยา","1 ชุด",320,6,45,12,"ผลไม้/ขนม"],
+ ["โรตีกล้วย","1 แผ่น",400,6,50,19,"ผลไม้/ขนม"],
+ ["วาฟเฟิล","1 ชิ้น",290,6,33,15,"ผลไม้/ขนม"],
+ ["คุกกี้","2 ชิ้น",140,2,18,7,"ผลไม้/ขนม"],
+ ["ไอศกรีม","1 สกู๊ป",140,2.5,17,7,"ผลไม้/ขนม"],
+ ["ขนมครก","1 คู่",70,1,8,4,"ผลไม้/ขนม"],
+ ["กล้วยทอด","4 ชิ้น",280,2,40,13,"ผลไม้/ขนม"],
+ ["ทับทิมกรอบ","1 ถ้วย",230,1,40,8,"ผลไม้/ขนม"],
+ ["เฉาก๊วย","1 ถ้วย",150,0,35,0,"ผลไม้/ขนม"],
+ ["ช็อกโกแลตแท่ง","1 แท่ง 45 ก.",230,3,26,13,"ผลไม้/ขนม"],
+ ["มันฝรั่งทอด (ถุง)","1 ถุง 50 ก.",270,3,25,18,"ผลไม้/ขนม"],
+ ["อัลมอนด์","30 ก.",170,6,6,15,"ผลไม้/ขนม"],
+ ["โปรตีนบาร์","1 แท่ง",200,20,20,7,"ผลไม้/ขนม"],
+ ["แตงโม","1 ถ้วย",50,1,12,0.2,"ผลไม้/ขนม"],
+ ["สับปะรด","1 ถ้วย",80,1,20,0.2,"ผลไม้/ขนม"],
+ ["มะละกอ","1 ถ้วย",60,0.7,15,0.4,"ผลไม้/ขนม"],
+ ["ฝรั่ง","1 ผล",110,4,24,1.5,"ผลไม้/ขนม"],
+ ["ทุเรียน","1 พู",180,2,33,5,"ผลไม้/ขนม"],
+ ["องุ่น","1 ถ้วย",100,1,27,0.2,"ผลไม้/ขนม"],
+ ["ลำไย","10 ผล",40,1,10,0,"ผลไม้/ขนม"]
+);
+// extra search words (English / other spellings) → matched together with the Thai name
+const KW={"มัทฉะ":"matcha ชาเขียว มัจฉะ มัชฉะ","ลาเต้":"latte ลาเต้ ลาเต","คาปูชิโน่":"cappuccino คาปู","มอคค่า":"mocha","เอสเปรสโซ่":"espresso","อเมริกาโน่":"americano","กาแฟ":"coffee","โกโก้":"cocoa ช็อกโกแลตเย็น","ชาเย็น":"ชาไทย thai tea ชานมเย็น","ชานมไข่มุก":"bubble tea ชาไข่มุก ไข่มุก","นมชมพู":"นมเย็น pink milk","เวย์":"whey protein","เบียร์":"beer","กะเพรา":"กระเพรา กะเพา kaprao","ข้าวมันไก่":"khao man gai","ผัดไทย":"pad thai","ส้มตำ":"somtam papaya salad ตำ","ไก่ทอด":"fried chicken kfc","พิซซ่า":"pizza","แฮมเบอร์เกอร์":"burger เบอร์เกอร์","เฟรนช์ฟรายส์":"fries มันทอด เฟรนฟราย","ซูชิ":"sushi","ราเมง":"ramen ราเม็ง","สปาเกตตี":"spaghetti pasta พาสต้า สปาเก็ตตี้","ครัวซองต์":"croissant ครัวซอง","เค้ก":"cake","ชีสเค้ก":"cheesecake","บราวนี่":"brownie","โดนัท":"donut","วาฟเฟิล":"waffle","คุกกี้":"cookie","ไอศกรีม":"ice cream ไอติม ไอศครีม","สลัด":"salad","อกไก่":"chicken breast","ข้าวโอ๊ต":"oat oatmeal โอ๊ต","โยเกิร์ต":"yogurt","สมูทตี้":"smoothie","แซนด์วิช":"sandwich แซนวิช","ทงคัตสึ":"tonkatsu","เกี๊ยวซ่า":"gyoza","โอนิกิริ":"onigiri ข้าวปั้น","หมูกระทะ":"moo kata","ชาบู":"shabu","มาม่า":"ไวไว ยำยำ บะหมี่กึ่งสำเร็จรูป","น้ำอัดลม":"coke pepsi โค้ก เป๊ปซี่ soda","ไข่ต้ม":"boiled egg","กล้วย":"banana","แอปเปิ้ล":"apple แอปเปิล","ทุเรียน":"durian","มะม่วง":"mango"};
+const normTH=t=>String(t||"").toLowerCase().replace(/[\s\-()\/+.,]/g,"").replace(/[\u0E47-\u0E4C]/g,"");
+const searchKey=f=>{let k=f[0];for(const w in KW)if(f[0].includes(w))k+=" "+KW[w];return normTH(k)};
+const bigr=t=>{const a=new Set();for(let i=0;i<t.length-1;i++)a.add(t.slice(i,i+2));return a};
+function searchFoods(list,q){
+  const nq=normTH(q);if(!nq)return{hits:list,near:[]};
+  const keyed=list.map(f=>[f,searchKey(f)]);
+  const hits=keyed.filter(([,k])=>k.includes(nq)).map(([f])=>f);
+  if(hits.length)return{hits,near:[]};
+  const qb=bigr(nq);if(!qb.size)return{hits:[],near:[]};
+  const near=keyed.map(([f,k])=>{const kb=bigr(k);let n=0;qb.forEach(b=>{if(kb.has(b))n++});return[f,n/qb.size]}).filter(x=>x[1]>=.34).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+  return{hits:[],near};
+}
 // ================= constants & helpers
 const MEALS=[["b","มื้อเช้า",.25],["l","มื้อกลางวัน",.35],["d","มื้อเย็น",.30],["s","ของว่าง",.10]];
 const SV=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
@@ -487,7 +631,7 @@ const ACTS=[[1.2,"นั่งทำงานเป็นหลัก","ไม�
  [1.9,"หนักมาก","ใช้แรงงานทั้งวัน หรือซ้อมวันละ 2 รอบ",SV('<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/>')]];
 const GOALS={lose:["ลดน้ำหนัก","ลดไขมัน (ลดน้ำหนัก)",IC.down,"var(--mint)","var(--g)"],keep:["รักษาน้ำหนัก","รักษาน้ำหนัก",IC.same,"#FFF2DC","#C98714"],gain:["เพิ่มน้ำหนัก","เพิ่มน้ำหนัก",IC.up,"#FDE8E4","#E0533C"]};
 const CATS=["ทั้งหมด","จานเดียว","เส้น","กับข้าว","ข้าว/แป้ง","เครื่องดื่ม","ผลไม้/ขนม","ของฉัน"];
-const EMO=[["กะเพรา","🍛"],["ข้าวมันไก่","🍗"],["ข้าวขาหมู","🍖"],["ข้าวหมูแดง","🍖"],["ข้าวผัด","🍳"],["ข้าวคลุกกะปิ","🍛"],["ข้าวเหนียวมะม่วง","🥭"],["ส้มตำ","🥗"],["ลาบ","🥗"],["ไก่ย่าง","🍗"],["อกไก่","🍗"],["หมูปิ้ง","🍢"],["ไส้อั่ว","🌭"],["ไข่","🍳"],["ต้มยำ","🍲"],["ต้มข่า","🍲"],["แกง","🍲"],["ก๋วยเตี๋ยว","🍜"],["บะหมี่","🍜"],["ข้าวซอย","🍜"],["ขนมจีน","🍜"],["ผัดไทย","🍝"],["ผัดซีอิ๊ว","🍝"],["ราดหน้า","🍝"],["โจ๊ก","🥣"],["ข้าวต้ม","🥣"],["ข้าวเหนียว","🍙"],["ขนมปัง","🍞"],["แซนด์วิช","🥪"],["ปาท่องโก๋","🥖"],["ชา","🧋"],["กาแฟ","☕"],["อเมริกาโน่","☕"],["นมถั่ว","🥛"],["นม","🥛"],["น้ำอัดลม","🥤"],["กล้วย","🍌"],["มะม่วง","🥭"],["ส้ม","🍊"],["แอปเปิ้ล","🍎"],["บัวลอย","🍡"],["ผัดผัก","🥬"],["น้ำพริก","🌶️"],["ข้าว","🍚"]];
+const EMO=[["มัทฉะ","🍵"],["ชาเขียว","🍵"],["ลาเต้","☕"],["คาปูชิโน่","☕"],["มอคค่า","☕"],["เอสเปรสโซ่","☕"],["โกโก้","🍫"],["ไมโล","🍫"],["ชานม","🧋"],["น้ำส้ม","🍊"],["น้ำมะพร้าว","🥥"],["สมูทตี้","🥤"],["เบียร์","🍺"],["โยเกิร์ต","🥛"],["เวย์","🥤"],["ชีสเค้ก","🍰"],["เค้ก","🍰"],["ครัวซองต์","🥐"],["โดนัท","🍩"],["บราวนี่","🍫"],["คุกกี้","🍪"],["วาฟเฟิล","🧇"],["ไอศกรีม","🍨"],["ช็อกโกแลต","🍫"],["มันฝรั่ง","🥔"],["อัลมอนด์","🥜"],["พิซซ่า","🍕"],["เบอร์เกอร์","🍔"],["เฟรนช์ฟรายส์","🍟"],["ซูชิ","🍣"],["ราเมง","🍜"],["สปาเกตตี","🍝"],["สลัด","🥗"],["แตงโม","🍉"],["สับปะรด","🍍"],["องุ่น","🍇"],["ข้าวโพด","🌽"],["มันเทศ","🍠"],["ปลา","🐟"],["กุ้ง","🦐"],["ซาลาเปา","🥟"],["ขนมจีบ","🥟"],["เกี๊ยวซ่า","🥟"],["หมูกระทะ","🥓"],["ชาบู","🍲"],["สุกี้","🍲"],["มาม่า","🍜"],["เย็นตาโฟ","🍜"],["ก๋วยจั๊บ","🍜"],["ทุเรียน","🍈"],["โรตี","🫓"],["ข้าวปั้น","🍙"],["ทงคัตสึ","🍱"],["แกงกะหรี่","🍛"],["กะเพรา","🍛"],["ข้าวมันไก่","🍗"],["ข้าวขาหมู","🍖"],["ข้าวหมูแดง","🍖"],["ข้าวผัด","🍳"],["ข้าวคลุกกะปิ","🍛"],["ข้าวเหนียวมะม่วง","🥭"],["ส้มตำ","🥗"],["ลาบ","🥗"],["ไก่ย่าง","🍗"],["อกไก่","🍗"],["หมูปิ้ง","🍢"],["ไส้อั่ว","🌭"],["ไข่","🍳"],["ต้มยำ","🍲"],["ต้มข่า","🍲"],["แกง","🍲"],["ก๋วยเตี๋ยว","🍜"],["บะหมี่","🍜"],["ข้าวซอย","🍜"],["ขนมจีน","🍜"],["ผัดไทย","🍝"],["ผัดซีอิ๊ว","🍝"],["ราดหน้า","🍝"],["โจ๊ก","🥣"],["ข้าวต้ม","🥣"],["ข้าวเหนียว","🍙"],["ขนมปัง","🍞"],["แซนด์วิช","🥪"],["ปาท่องโก๋","🥖"],["ชา","🧋"],["กาแฟ","☕"],["อเมริกาโน่","☕"],["นมถั่ว","🥛"],["นม","🥛"],["น้ำอัดลม","🥤"],["กล้วย","🍌"],["มะม่วง","🥭"],["ส้ม","🍊"],["แอปเปิ้ล","🍎"],["บัวลอย","🍡"],["ผัดผัก","🥬"],["น้ำพริก","🌶️"],["ข้าว","🍚"]];
 const emo=n=>{for(const[k,e]of EMO)if(n.includes(k))return e;return"🍽️"};
 const KEY="kinpodee-v1";
 const $=id=>document.getElementById(id);
@@ -577,11 +721,16 @@ function renderLog(){
   const q=$("q").value.trim();
   $("cats").innerHTML=CATS.map(c=>`<button data-c="${c}" aria-pressed="${c===logCat}">${c}</button>`).join("");
   let fs,title;
-  if(q||logCat!=="ทั้งหมด"){fs=allFoods().filter(f=>(logCat==="ทั้งหมด"||f[6]===logCat)&&(!q||f[0].includes(q)));title=q?`ผลการค้นหา "${q}"`:logCat}
+  let near=[];
+  if(q||logCat!=="ทั้งหมด"){const base=allFoods().filter(f=>logCat==="ทั้งหมด"||f[6]===logCat),r=searchFoods(base,q);fs=r.hits;near=r.near;title=q?(fs.length?`ผลการค้นหา "${q}"`:`ไม่พบ "${q}" ในคลังอาหาร`):logCat}
   else{fs=frequent();title="อาหารที่บันทึกบ่อย"}
   $("listTitle").textContent=title;
   $("flist").innerHTML=fs.map(f=>`<div class="li"><button class="fimg" data-open="${esc(f[0])}" style="border:0" aria-label="ดูรายละเอียด ${esc(f[0])}">${emo(f[0])}</button><button class="n" data-open="${esc(f[0])}" style="border:0;background:none;text-align:left;padding:0">${esc(f[0])}<small class="num">${f[2]} kcal · ${esc(f[1])}</small></button><span class="r"><span class="num">${f[2]} kcal</span><button class="addc" data-quick="${esc(f[0])}" aria-label="เพิ่ม ${esc(f[0])}">${IC.plus}</button></span></div>`).join("")
-    ||`<p class="note" style="padding:10px 0">ไม่พบ "${esc(q)}" ลองกด "เพิ่มเอง" เพื่อสร้างเมนูนี้</p>`;
+    ||(q?`<div class="card" style="margin:6px 0 4px;gap:10px"><b style="font-size:15px">ให้ AI ประเมิน "${esc(q)}"</b><p class="note">AI จะประมาณแคลอรี่ โปรตีน คาร์บ ไขมันจากชื่อเมนู แก้ไขได้ก่อนบันทึก</p><div class="row"><button class="btn" id="aiText" style="flex:2">ประเมินด้วย AI</button><button class="btn out" id="selfAdd" style="flex:1">เพิ่มเอง</button></div></div>`+
+      (near.length?`<div class="sec-h" style="margin-top:10px"><h2 style="font-size:14px">หรือเมนูที่ใกล้เคียง</h2></div>`+near.map(f=>`<div class="li"><button class="fimg" data-open="${esc(f[0])}" style="border:0" aria-label="ดูรายละเอียด ${esc(f[0])}">${emo(f[0])}</button><button class="n" data-open="${esc(f[0])}" style="border:0;background:none;text-align:left;padding:0">${esc(f[0])}<small class="num">${f[2]} kcal · ${esc(f[1])}</small></button><span class="r"><span class="num">${f[2]} kcal</span><button class="addc" data-quick="${esc(f[0])}" aria-label="เพิ่ม ${esc(f[0])}">${IC.plus}</button></span></div>`).join(""):"")
+      :`<p class="note" style="padding:10px 0">ยังไม่มีเมนูในหมวดนี้</p>`);
+  if($("aiText"))$("aiText").onclick=()=>aiFromText(q);
+  if($("selfAdd"))$("selfAdd").onclick=()=>openCustom(q);
 }
 
 // ================= pages
@@ -873,13 +1022,16 @@ const metaTxt=i=>`P ${r1(scaled(i,i.p))} · C ${r1(scaled(i,i.c))} · F ${r1(sca
 function renderScan(){
   const st=scanState;
   $("shotImg").hidden=!st||!st.img;if(st&&st.img)$("shotImg").src=st.img;
-  $("scHint").hidden=!!(st&&st.img);$("scanning").hidden=!(st&&st.loading);
+  $("scHint").hidden=!!(st&&st.img)||!!cams.scVideo;$("scanning").hidden=!(st&&st.loading);
+  $("viewer").hidden=!!(st&&st.text&&!st.loading);$("pgScan").querySelector("h1").textContent=st&&st.text?"ประเมินด้วย AI":"ถ่ายรูปอาหารด้วย AI";
+  if(st&&st.text&&st.loading){$("scHint").hidden=false;$("scHint").innerHTML=`<span class="spin" style="width:30px;height:30px;border-width:3px"></span>กำลังประเมิน "${esc(st.text)}"…`;$("scanning").hidden=true}
+  else if(!st||!st.text)$("scHint").innerHTML=SCHINT;
   $("scCapture").hidden=!!(st&&(st.loading||st.items.length||st.error));
   const R=$("scResult");
   if(!st&&!(aiCfg().url&&aiCfg().token)){R.hidden=false;R.innerHTML=aiSetupHtml();wireAiSetup();return}
   if(!st||st.loading){R.hidden=true;return}
   R.hidden=false;
-  if(st.error){R.innerHTML=`<div class="errbox">${esc(st.error)}</div><button class="btn" id="scRetry">ถ่ายใหม่</button>`;$("scRetry").onclick=retake;return}
+  if(st.error){R.innerHTML=`<div class="errbox">${esc(st.error)}</div><button class="btn" id="scRetry">ถ่ายใหม่</button>`;$("scRetry").onclick=retake;$("scRetry").textContent=st.text?"กลับไปค้นหา":"ถ่ายใหม่";return}
   const on=st.items.filter(i=>i.on),tot=on.reduce((a,i)=>a+i.k*i.q,0),P=on.reduce((a,i)=>a+scaled(i,i.p),0),C=on.reduce((a,i)=>a+scaled(i,i.c),0),F=on.reduce((a,i)=>a+scaled(i,i.f),0);
   R.innerHTML=`<div><h2 style="font-size:18px">${esc(st.items.map(i=>i.name).slice(0,3).join(" + "))}</h2><div class="ai-total"><span class="muted" style="font-size:14px">ประมาณ</span><b class="num" id="scTot">${fmt(tot)} kcal</b></div></div>
   <div class="fdm" id="scMac">${[["โปรตีน",P,"--pro"],["คาร์โบไฮเดรต",C,"--carb"],["ไขมัน",F,"--fat"]].map(([t,v,col])=>`<div style="background:var(--bg-2);border-radius:14px;padding:10px 4px"><small>${t}</small><b class="num" style="color:var(${col})">${r0(v)} g</b></div>`).join("")}</div>
@@ -887,7 +1039,7 @@ function renderScan(){
   ${st.note?`<p class="note">${esc(st.note)}</p>`:""}
   <div class="field"><span class="flabel">บันทึกลงมื้อ</span><div class="mealpick" id="scMeal">${MEALS.map(([m,l])=>`<button data-m="${m}" aria-pressed="${m===st.meal}">${l.replace("มื้อ","")}</button>`).join("")}</div></div>
   <p class="note">ค่าจาก AI เป็นค่าประมาณ แก้ชื่อ จำนวน หรือแคลอรี่ได้ก่อนบันทึก</p>
-  <div class="row" style="padding-bottom:8px"><button class="btn out" id="scBack" style="flex:1">ถ่ายใหม่</button><button class="btn" id="scAdd" style="flex:2" ${on.length?"":"disabled"}>บันทึก ${on.length} รายการ</button></div>`;
+  <div class="row" style="padding-bottom:8px"><button class="btn out" id="scBack" style="flex:1">${st.text?"กลับ":"ถ่ายใหม่"}</button><button class="btn" id="scAdd" style="flex:2" ${on.length?"":"disabled"}>บันทึก ${on.length} รายการ</button></div>`;
   const upd=()=>{const on=st.items.filter(i=>i.on);$("scTot").textContent=fmt(on.reduce((a,i)=>a+i.k*i.q,0))+" kcal";
     const sums=[["p"],["c"],["f"]].map(([k])=>on.reduce((a,i)=>a+scaled(i,i[k]),0));[...$("scMac").children].forEach((d,j)=>d.querySelector("b").textContent=r0(sums[j])+" g");
     $("scAdd").disabled=!on.length;$("scAdd").textContent="บันทึก "+on.length+" รายการ"};
@@ -899,10 +1051,23 @@ function renderScan(){
   $("scMeal").onclick=e=>{const b=e.target.closest("[data-m]");if(b){st.meal=b.dataset.m;[...$("scMeal").children].forEach(x=>x.setAttribute("aria-pressed",x===b))}};
   $("scBack").onclick=retake;
   $("scAdd").onclick=()=>{const on=st.items.filter(i=>i.on&&i.name.trim());if(!on.length)return;
-    on.forEach(i=>{const f=i.k/(i.k0||1);addEntry(st.meal,{name:i.name.trim(),unit:i.unit,q:i.q,k:i.k,p:r1(i.p*f),c:r1(i.c*f),f:r1(i.f*f),cat:"AI"})});
-    scanState=null;closePage("pgScan");show("today");toast("บันทึก "+on.length+" รายการจากรูปแล้ว")};
+    on.forEach(i=>{const f=i.k/(i.k0||1),o={name:i.name.trim(),unit:i.unit,q:i.q,k:i.k,p:r1(i.p*f),c:r1(i.c*f),f:r1(i.f*f)};addEntry(st.meal,{...o,cat:"AI"});
+      if(st.text){S.custom=S.custom.filter(x=>x.n!==o.name);S.custom.push({n:o.name,u:o.unit,k:o.k,p:o.p,c:o.c,f:o.f})}});if(st.text){save();$("q").value=""}
+    const wasText=!!st.text;scanState=null;closePage("pgScan");show("today");toast(wasText?"บันทึกแล้ว และเก็บเมนูไว้ในหมวด \"ของฉัน\"":"บันทึก "+on.length+" รายการจากรูปแล้ว")};
 }
-function retake(){scanState=null;openScan()}
+function retake(){if(scanState&&scanState.text){const t=scanState.text;scanState=null;closePage("pgScan");$("q").value=t;show("log");return}scanState=null;openScan()}
+async function aiFromText(text){
+  stopCam("scVideo");openPage("pgScan");
+  scanState={img:"",text,loading:true,items:[],meal:logMeal||guessMeal()};renderScan();
+  if(!(aiCfg().url&&aiCfg().token)){scanState=null;renderScan();return}
+  try{const d=await callAI({action:"text",text});if(!scanState)return;
+    scanState.loading=false;scanState.note=d.note||"";
+    scanState.items=(d.items||[]).map(i=>({...i,q:1,k0:i.kcal||1,k:i.kcal,on:true}));
+    if(!scanState.items.length)scanState.error=d.note||"AI ประเมินเมนูนี้ไม่ได้ ลองพิมพ์ให้ละเอียดขึ้น หรือกดเพิ่มเอง";
+  }catch(e){if(scanState){scanState.loading=false;scanState.error=/ไม่พบรูปภาพ/.test(e.message)?"Apps Script ยังเป็นเวอร์ชันเก่า อัปเดตโค้ดจากไฟล์ apps-script/Code.gs ใน repo แล้ว Deploy → Manage deployments → New version":e.message}}
+  renderScan();
+}
+const SCHINT=$("scHint").innerHTML;
 function aiSetupHtml(){return `<div><h2 style="font-size:17px">ตั้งค่า AI ก่อนใช้งานครั้งแรก</h2><p class="note" style="margin-top:4px">ใส่ลิงก์ Web app ของ Google Apps Script และรหัสลับ (APP_TOKEN) ที่ตั้งไว้ ทำครั้งเดียว ดูวิธีสร้างใน README ของ repo</p></div>
   <div class="field"><label for="aiUrl2">ลิงก์ Web app (ลงท้าย /exec)</label><input id="aiUrl2" type="url" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></div>
   <div class="field"><label for="aiTok2">รหัสลับ</label><input id="aiTok2" type="password" autocomplete="off"></div>

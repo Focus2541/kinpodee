@@ -20,7 +20,15 @@ function doPost(e) {
     if (!props.getProperty('APP_TOKEN') || req.token !== props.getProperty('APP_TOKEN')) {
       return json_({ ok: false, error: 'รหัสลับไม่ถูกต้อง' });
     }
-    if (req.action === 'ping') return json_({ ok: true });
+    if (req.action === 'ping') return json_({ ok: true, version: 2 });
+
+    if (req.action === 'text') {
+      const name = String(req.text || '').trim().slice(0, 120);
+      if (!name) return json_({ ok: false, error: 'ไม่พบชื่ออาหาร' });
+      if (!rateOk_()) return json_({ ok: false, error: 'ใช้งานถี่เกินไป รอสักครู่แล้วลองใหม่' });
+      const r = analyze_(null, null, name, props);
+      return json_({ ok: true, items: r.items || [], note: r.note || '' });
+    }
 
     if (!req.image || typeof req.image !== 'string') return json_({ ok: false, error: 'ไม่พบรูปภาพ' });
     if (req.image.length > MAX_IMAGE_CHARS) return json_({ ok: false, error: 'รูปใหญ่เกินไป' });
@@ -34,20 +42,25 @@ function doPost(e) {
 }
 
 function analyze_(b64, mime, hint, props) {
+  const fromText = !b64;
   const key = props.getProperty('GEMINI_API_KEY');
   if (!key) throw new Error('ยังไม่ได้ตั้ง GEMINI_API_KEY');
   const model = props.getProperty('MODEL') || 'gemini-flash-latest';
 
-  const prompt =
-    'คุณเป็นนักโภชนาการไทย ดูรูปอาหารนี้แล้วแยกเป็นรายการอาหารแต่ละอย่างที่เห็น ' +
+  const prompt = fromText
+    ? 'คุณเป็นนักโภชนาการไทย ผู้ใช้กินอาหาร/เครื่องดื่มชื่อ "' + hint + '" ' +
+      'ประเมินค่าพลังงานและสารอาหารของ 1 ที่ตามขนาดที่ขายทั่วไปในประเทศไทย (เช่น เครื่องดื่มร้านกาแฟ 1 แก้ว 16 ออนซ์ หวานปกติ) ' +
+      'ถ้าเป็นจานที่มีหลายอย่างให้แยกเป็นหลายรายการ ถ้าเป็นเมนูเดียวให้ตอบรายการเดียว ใช้ชื่อภาษาไทยที่คนทั่วไปเรียก หน่วยเป็นภาษาไทย ' +
+      'ถ้าไม่ใช่ชื่ออาหารให้ items เป็นรายการว่าง และอธิบายใน note สั้น ๆ เป็นภาษาไทย'
+    : 'คุณเป็นนักโภชนาการไทย ดูรูปอาหารนี้แล้วแยกเป็นรายการอาหารแต่ละอย่างที่เห็น ' +
     'ประเมินปริมาณจากขนาดภาชนะในรูป แล้วให้ค่าพลังงานและสารอาหารของ "ปริมาณที่เห็นในรูป" ' +
     'ใช้ชื่ออาหารไทยที่คนทั่วไปเรียก หน่วยเป็นภาษาไทย เช่น จาน ชาม ถ้วย ทัพพี ฟอง ไม้ แก้ว ' +
     'คิดน้ำมันที่ใช้ปรุงด้วย ถ้าไม่ใช่รูปอาหาร ให้ items เป็นรายการว่าง และอธิบายใน note ' +
     'note ให้เขียนสั้น ๆ ไม่เกิน 1 ประโยค เป็นภาษาไทย' +
-    (hint ? '\nข้อมูลเพิ่มเติมจากผู้ใช้: ' + String(hint).slice(0, 200) : '');
+    (hint && !fromText ? '\nข้อมูลเพิ่มเติมจากผู้ใช้: ' + String(hint).slice(0, 200) : '');
 
   const body = {
-    contents: [{ parts: [{ text: prompt }, { inline_data: { mime_type: mime, data: b64 } }] }],
+    contents: [{ parts: fromText ? [{ text: prompt }] : [{ text: prompt }, { inline_data: { mime_type: mime, data: b64 } }] }],
     generationConfig: {
       temperature: 0.2,
       responseMimeType: 'application/json',
