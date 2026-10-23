@@ -134,7 +134,7 @@ input,select,textarea{font:inherit;color:var(--fg);background:var(--surface);bor
 input:focus,select:focus,textarea:focus{border-color:var(--g);outline:none}
 .field{display:flex;flex-direction:column;gap:5px;flex:1 1 120px;min-width:0}
 .field label,.flabel{font-size:12px;color:var(--muted);font-weight:600}
-.card>.field,.page-in>.field{flex:none}
+.card>.field,.page-in>.field,.sheetcard>.field,.sheetcard .field{flex:none}
 .row{display:flex;gap:10px;flex-wrap:wrap}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
 .card h2{font-size:15px;font-weight:700}
@@ -217,7 +217,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g);outline:none}
 .page.cam .bar-top{padding:0 max(12px,env(safe-area-inset-left,0px));color:#fff}
 .page.cam .iconbtn{color:#fff}
 .viewer{position:relative;margin:8px max(16px,env(safe-area-inset-left,0px)) 0;border-radius:22px;overflow:hidden;aspect-ratio:1/1;max-width:100%;background:#1C2621;display:grid;place-items:center}
-.viewer img{width:100%;height:100%;object-fit:cover;display:block}
+.viewer img,.viewer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.viewer .hint{position:relative;z-index:1}
 .viewer .corners{position:absolute;inset:10%;pointer-events:none}
 .viewer .corners i{position:absolute;width:34px;height:34px;border:4px solid #3DDC8E}
 .viewer .corners i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
@@ -365,16 +366,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--g);outline:none}
 <div class="page onb" id="onb" hidden><div class="page-in" id="onbIn"></div></div>
 <div class="page cam" id="pgScan" hidden><div class="page-in">
   <div class="bar-top"><button class="iconbtn" id="scClose" aria-label="ปิด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 style="font-size:17px;flex:1">ถ่ายรูปอาหารด้วย AI</h1><span style="width:40px"></span></div>
-  <div class="viewer" id="viewer"><div class="hint" id="scHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>ถ่ายให้เห็นทั้งจาน มีแสงพอ<br>AI จะแยกเมนูและประเมินแคลอรี่ให้</div><img id="shotImg" alt="รูปอาหารที่ถ่าย" hidden><div class="corners"><i></i><i></i><i></i><i></i></div><div class="status" id="scanning" hidden><span class="spin"></span>กำลังวิเคราะห์…</div></div>
-  <div id="scCapture"><button class="capbtn" id="camBtn" aria-label="ถ่ายรูป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg></button><p class="camtip">แตะเพื่อถ่ายรูป หรือเลือกรูปจากเครื่อง</p></div>
-  <input type="file" id="camIn" accept="image/*" capture="environment" hidden>
-  <div class="sheetcard" id="scResult" hidden></div>
+  <div class="viewer" id="viewer"><div class="hint" id="scHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>ถ่ายให้เห็นทั้งจาน มีแสงพอ<br>AI จะแยกเมนูและประเมินแคลอรี่ให้</div><video id="scVideo" playsinline muted hidden></video><img id="shotImg" alt="รูปอาหารที่ถ่าย" hidden><div class="corners"><i></i><i></i><i></i><i></i></div><div class="status" id="scanning" hidden><span class="spin"></span>กำลังวิเคราะห์…</div></div>
+  <div id="scCapture"><button class="capbtn" id="camBtn" aria-label="ถ่ายรูป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg></button><p class="camtip" id="scTip">แตะปุ่มเพื่อถ่ายรูป</p><p style="text-align:center;margin:4px 0 0"><button class="link" id="scGallery" style="color:#3DDC8E">เลือกรูปจากเครื่อง</button></p></div>
+  <input type="file" id="camIn" accept="image/*" capture="environment" hidden><input type="file" id="galIn" accept="image/*" hidden>
+  <div class="sheetcard" id="scResult" style="margin-top:16px" hidden></div>
 </div></div>
 <div class="page cam" id="pgBar" hidden><div class="page-in">
   <div class="bar-top"><button class="iconbtn" id="barClose" aria-label="ปิด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 style="font-size:17px;flex:1">สแกนบาร์โค้ด</h1><span style="width:40px"></span></div>
-  <div class="viewer" style="aspect-ratio:4/3"><div class="hint" id="barHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 8V5h3M17 5h3v3M20 16v3h-3M7 19H4v-3M8 9v6M11 9v6M14 9v6M17 9v6"/></svg>ถ่ายรูปบาร์โค้ดบนบรรจุภัณฑ์ให้ชัด</div><img id="barImg" alt="รูปบาร์โค้ด" hidden><div class="corners" style="inset:22% 14%"><i></i><i></i><i></i><i></i></div><div class="status" id="barBusy" hidden><span class="spin"></span>กำลังค้นหาสินค้า…</div></div>
-  <div><button class="capbtn" id="barCap" aria-label="ถ่ายรูปบาร์โค้ด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 9v6M11 9v6M14 9v6M17 9v6"/></svg></button></div>
-  <input type="file" id="barIn" accept="image/*" capture="environment" hidden>
+  <div class="viewer" style="aspect-ratio:4/3"><div class="hint" id="barHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 8V5h3M17 5h3v3M20 16v3h-3M7 19H4v-3M8 9v6M11 9v6M14 9v6M17 9v6"/></svg>ถ่ายรูปบาร์โค้ดบนบรรจุภัณฑ์ให้ชัด</div><video id="barVideo" playsinline muted hidden></video><img id="barImg" alt="รูปบาร์โค้ด" hidden><div class="corners" style="inset:22% 14%"><i></i><i></i><i></i><i></i></div><div class="status" id="barBusy" hidden><span class="spin"></span>กำลังค้นหาสินค้า…</div></div>
+  <div><p class="camtip" id="barTip" style="margin:12px 0 0">เล็งบาร์โค้ดให้อยู่ในกรอบ ระบบจะอ่านให้เอง</p><button class="capbtn" id="barCap" aria-label="ถ่ายรูปบาร์โค้ด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 9v6M11 9v6M14 9v6M17 9v6"/></svg></button></div>
+  <input type="file" id="barIn" accept="image/*" hidden>
   <div class="sheetcard" id="barResult" style="margin-top:16px"></div>
 </div></div>
 
@@ -837,11 +838,28 @@ async function callAI(payload){
   if(!d.ok)throw new Error(d.error||"เกิดข้อผิดพลาด");
   return d;
 }
-function openScan(){scanState=null;openPage("pgScan");renderScan()}
+// ---- live camera (getUserMedia) with file-picker fallback
+const cams={};
+async function startCam(vid){
+  stopCam(vid);const v=$(vid);
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("nocam");
+  const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1280},height:{ideal:960}},audio:false});
+  cams[vid]=st;v.srcObject=st;v.hidden=false;await v.play().catch(()=>{});return v;
+}
+function stopCam(vid){const st=cams[vid];if(st){st.getTracks().forEach(t=>t.stop());delete cams[vid]}const v=$(vid);if(v){v.srcObject=null;v.hidden=true}}
+function grabFrame(v,max=1024){const w=v.videoWidth,h=v.videoHeight;if(!w)return null;const s=Math.min(1,max/Math.max(w,h)),cv=document.createElement("canvas");
+  cv.width=Math.round(w*s);cv.height=Math.round(h*s);cv.getContext("2d").drawImage(v,0,0,cv.width,cv.height);return cv}
+const camErrText=e=>e&&e.name==="NotAllowedError"?"ยังไม่ได้อนุญาตให้ใช้กล้อง กดรูปกุญแจข้างช่องลิงก์ → อนุญาตกล้อง หรือใช้ปุ่มเลือกรูปจากเครื่อง":"เปิดกล้องไม่ได้ ใช้ปุ่มเลือกรูปจากเครื่องแทนได้";
+
+async function openScan(){scanState=null;openPage("pgScan");renderScan();
+  try{await startCam("scVideo");$("scHint").hidden=true;$("scTip").textContent="แตะปุ่มเพื่อถ่ายรูป"}
+  catch(e){$("scTip").textContent=e.message==="nocam"?"แตะปุ่มเพื่อถ่ายรูปหรือเลือกรูป":camErrText(e)}}
 async function startScan(file){
-  scanState={img:"",loading:true,items:[],meal:logMeal||guessMeal()};renderScan();
+  const data=await resizeImage(file).catch(e=>{toast(e.message);return null});if(data)startScanData(data)}
+async function startScanData(data){
+  stopCam("scVideo");
+  scanState={img:data,loading:true,items:[],meal:logMeal||guessMeal()};renderScan();
   try{
-    const data=await resizeImage(file);scanState.img=data;renderScan();
     const d=await callAI({action:"analyze",image:data.split(",")[1],mime:"image/jpeg"});
     if(!scanState)return;
     scanState.loading=false;scanState.note=d.note||"";
@@ -856,11 +874,12 @@ function renderScan(){
   const st=scanState;
   $("shotImg").hidden=!st||!st.img;if(st&&st.img)$("shotImg").src=st.img;
   $("scHint").hidden=!!(st&&st.img);$("scanning").hidden=!(st&&st.loading);
-  $("scCapture").hidden=!!(st&&(st.loading||st.items.length));
+  $("scCapture").hidden=!!(st&&(st.loading||st.items.length||st.error));
   const R=$("scResult");
+  if(!st&&!(aiCfg().url&&aiCfg().token)){R.hidden=false;R.innerHTML=aiSetupHtml();wireAiSetup();return}
   if(!st||st.loading){R.hidden=true;return}
   R.hidden=false;
-  if(st.error){R.innerHTML=`<div class="errbox">${esc(st.error)}</div><button class="btn" id="scRetry">ถ่ายใหม่</button>`;$("scRetry").onclick=()=>$("camIn").click();return}
+  if(st.error){R.innerHTML=`<div class="errbox">${esc(st.error)}</div><button class="btn" id="scRetry">ถ่ายใหม่</button>`;$("scRetry").onclick=retake;return}
   const on=st.items.filter(i=>i.on),tot=on.reduce((a,i)=>a+i.k*i.q,0),P=on.reduce((a,i)=>a+scaled(i,i.p),0),C=on.reduce((a,i)=>a+scaled(i,i.c),0),F=on.reduce((a,i)=>a+scaled(i,i.f),0);
   R.innerHTML=`<div><h2 style="font-size:18px">${esc(st.items.map(i=>i.name).slice(0,3).join(" + "))}</h2><div class="ai-total"><span class="muted" style="font-size:14px">ประมาณ</span><b class="num" id="scTot">${fmt(tot)} kcal</b></div></div>
   <div class="fdm" id="scMac">${[["โปรตีน",P,"--pro"],["คาร์โบไฮเดรต",C,"--carb"],["ไขมัน",F,"--fat"]].map(([t,v,col])=>`<div style="background:var(--bg-2);border-radius:14px;padding:10px 4px"><small>${t}</small><b class="num" style="color:var(${col})">${r0(v)} g</b></div>`).join("")}</div>
@@ -878,18 +897,50 @@ function renderScan(){
   $("scList").onclick=e=>{const b=e.target.closest("[data-q]");if(!b)return;const row=b.closest("[data-i]"),i=st.items[+row.dataset.i];
     i.q=Math.min(10,Math.max(.5,i.q+.5*(+b.dataset.q)));row.querySelector("[data-qv]").textContent=i.q;row.querySelector("[data-meta]").textContent=metaTxt(i);upd()};
   $("scMeal").onclick=e=>{const b=e.target.closest("[data-m]");if(b){st.meal=b.dataset.m;[...$("scMeal").children].forEach(x=>x.setAttribute("aria-pressed",x===b))}};
-  $("scBack").onclick=()=>{scanState=null;renderScan();$("camIn").click()};
+  $("scBack").onclick=retake;
   $("scAdd").onclick=()=>{const on=st.items.filter(i=>i.on&&i.name.trim());if(!on.length)return;
     on.forEach(i=>{const f=i.k/(i.k0||1);addEntry(st.meal,{name:i.name.trim(),unit:i.unit,q:i.q,k:i.k,p:r1(i.p*f),c:r1(i.c*f),f:r1(i.f*f),cat:"AI"})});
     scanState=null;closePage("pgScan");show("today");toast("บันทึก "+on.length+" รายการจากรูปแล้ว")};
 }
-$("camBtn").onclick=()=>$("camIn").click();
-$("camIn").onchange=e=>{const f=e.target.files[0];e.target.value="";if(f)startScan(f)};
-$("scClose").onclick=()=>{scanState=null;closePage("pgScan")};
+function retake(){scanState=null;openScan()}
+function aiSetupHtml(){return `<div><h2 style="font-size:17px">ตั้งค่า AI ก่อนใช้งานครั้งแรก</h2><p class="note" style="margin-top:4px">ใส่ลิงก์ Web app ของ Google Apps Script และรหัสลับ (APP_TOKEN) ที่ตั้งไว้ ทำครั้งเดียว ดูวิธีสร้างใน README ของ repo</p></div>
+  <div class="field"><label for="aiUrl2">ลิงก์ Web app (ลงท้าย /exec)</label><input id="aiUrl2" type="url" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></div>
+  <div class="field"><label for="aiTok2">รหัสลับ</label><input id="aiTok2" type="password" autocomplete="off"></div>
+  <button class="btn" id="aiGo2">ทดสอบและบันทึก</button><p class="note" id="aiStatus2"></p>`}
+function wireAiSetup(){$("aiGo2").onclick=async()=>{const url=$("aiUrl2").value.trim(),token=$("aiTok2").value.trim();
+  if(!/^https:\/\/script\.google\.com\/.+\/exec$/.test(url))return $("aiStatus2").textContent="ลิงก์ต้องขึ้นต้นด้วย https://script.google.com/ และลงท้ายด้วย /exec";
+  if(!token)return $("aiStatus2").textContent="ใส่รหัสลับด้วย";
+  const prev=S.ai;S.ai={url,token};$("aiStatus2").textContent="กำลังทดสอบ…";
+  try{await callAI({action:"ping"});save();toast("เชื่อมต่อ AI แล้ว พร้อมถ่ายรูป");renderScan()}catch(e){S.ai=prev;$("aiStatus2").textContent=e.message}}}
+$("camBtn").onclick=()=>{const v=$("scVideo");
+  if(cams.scVideo&&v.videoWidth){const cv=grabFrame(v);if(cv)return startScanData(cv.toDataURL("image/jpeg",.82))}
+  $("camIn").click()};
+$("scGallery").onclick=()=>$("galIn").click();
+$("camIn").onchange=$("galIn").onchange=e=>{const f=e.target.files[0];e.target.value="";if(f)startScan(f)};
+$("scClose").onclick=()=>{scanState=null;stopCam("scVideo");closePage("pgScan")};
 
 // ================= Barcode (BarcodeDetector + Open Food Facts)
 let barState=null;
-function openBar(){barState=null;openPage("pgBar");renderBar()}
+let zxLoad=null,barLoop=0;
+function loadZX(){if(window.ZXing)return Promise.resolve();return zxLoad||(zxLoad=new Promise((ok,bad)=>{const sc=document.createElement("script");
+  sc.src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js";sc.onload=ok;sc.onerror=()=>{zxLoad=null;bad(new Error("โหลดตัวอ่านบาร์โค้ดไม่ได้ ตรวจอินเทอร์เน็ต"))};document.head.appendChild(sc)}))}
+async function makeDecoder(){
+  if("BarcodeDetector" in window){try{const fm=await BarcodeDetector.getSupportedFormats();if(fm.includes("ean_13")){const d=new BarcodeDetector({formats:["ean_13","ean_8","upc_a","upc_e"].filter(f=>fm.includes(f))});return async src=>{const r=await d.detect(src);return r[0]&&r[0].rawValue}}}catch(_){}}
+  await loadZX();const Z=window.ZXing,hints=new Map();
+  hints.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E]);hints.set(Z.DecodeHintType.TRY_HARDER,true);
+  const rd=new Z.MultiFormatReader();rd.setHints(hints);
+  return async src=>{let cv=src;if(!(src instanceof HTMLCanvasElement)){cv=document.createElement("canvas");const w=src.videoWidth||src.naturalWidth,h=src.videoHeight||src.naturalHeight,s=Math.min(1,1280/Math.max(w,h));cv.width=w*s;cv.height=h*s;cv.getContext("2d").drawImage(src,0,0,cv.width,cv.height)}
+    try{return rd.decode(new Z.BinaryBitmap(new Z.HybridBinarizer(new Z.HTMLCanvasElementLuminanceSource(cv)))).getText()}catch(_){return null}finally{rd.reset()}};
+}
+async function openBar(){barState=null;openPage("pgBar");renderBar();const my=++barLoop;
+  try{const v=await startCam("barVideo");$("barHint").hidden=true;$("barTip").textContent="เล็งบาร์โค้ดให้อยู่ในกรอบ ระบบจะอ่านให้เอง";
+    const dec=await makeDecoder();
+    const tick=async()=>{if(my!==barLoop||!cams.barVideo)return;let code=null;
+      if(v.videoWidth){const cv=grabFrame(v,1280);if(cv)code=await dec(cv).catch(()=>null)}
+      if(code&&my===barLoop){stopCam("barVideo");if(navigator.vibrate)navigator.vibrate(60);barState={code};lookup(code);return}
+      setTimeout(tick,350)};
+    tick();
+  }catch(e){$("barTip").textContent=e.message==="nocam"?"แตะปุ่มเพื่อเลือกรูปบาร์โค้ด":e.name?camErrText(e):e.message}}
 function renderBar(){
   const st=barState||{},R=$("barResult");
   $("barImg").hidden=!st.img;if(st.img)$("barImg").src=st.img;$("barHint").hidden=!!st.img;$("barBusy").hidden=!st.loading;
@@ -902,8 +953,9 @@ function renderBar(){
     $("barMeal").onclick=e=>{const b=e.target.closest("[data-m]");if(b){st.meal=b.dataset.m;renderBar()}};
     $("barSave").onclick=()=>{addEntry(st.meal,{name:p.name,unit:p.basis,q:1,k:p.k,p:p.p,c:p.c,f:p.f,cat:"บาร์โค้ด"});closePage("pgBar");show("today");toast("บันทึก "+p.name+" แล้ว")};
   } else {
-    R.innerHTML=`${st.error?`<div class="errbox">${esc(st.error)}</div>`:""}<div class="field"><label for="barCode">หรือพิมพ์เลขบาร์โค้ด</label><div class="row" style="flex-wrap:nowrap"><input id="barCode" inputmode="numeric" value="${esc(st.code||"")}" placeholder="เช่น 8851234567890"><button class="btn sm" id="barGo" style="padding:10px 16px">ค้นหา</button></div></div><p class="note">ข้อมูลสินค้าจาก Open Food Facts ฐานข้อมูลเปิดที่ผู้ใช้ช่วยกันเพิ่ม สินค้าไทยบางรายการอาจยังไม่มี</p><button class="link" id="barManual">ค้นหาอาหารด้วยตนเอง</button>`;
-    $("barGo").onclick=()=>lookup($("barCode").value.trim());
+    R.innerHTML=`${st.error?`<div class="errbox">${esc(st.error)}</div>`:""}${st.img||st.code?`<button class="btn out" id="barAgain">สแกนใหม่</button>`:""}<div class="field"><label for="barCode">หรือพิมพ์เลขบาร์โค้ด</label><div class="row" style="flex-wrap:nowrap"><input id="barCode" inputmode="numeric" value="${esc(st.code||"")}" placeholder="เช่น 8851234567890"><button class="btn sm" id="barGo" style="padding:10px 16px">ค้นหา</button></div></div><p class="note">ข้อมูลสินค้าจาก Open Food Facts ฐานข้อมูลเปิดที่ผู้ใช้ช่วยกันเพิ่ม สินค้าไทยบางรายการอาจยังไม่มี</p><button class="link" id="barManual">ค้นหาอาหารด้วยตนเอง</button>`;
+    $("barGo").onclick=()=>{barLoop++;stopCam("barVideo");lookup($("barCode").value.trim())};
+    if($("barAgain"))$("barAgain").onclick=openBar;
   }
   $("barManual").onclick=()=>{closePage("pgBar");show("log");$("q").focus()};
 }
@@ -922,12 +974,11 @@ async function lookup(code){
 }
 $("barCap").onclick=()=>$("barIn").click();
 $("barIn").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
-  const url=URL.createObjectURL(f);barState={img:url,loading:true};renderBar();
-  if(!("BarcodeDetector" in window)){barState={img:url,error:"เบราว์เซอร์นี้อ่านบาร์โค้ดจากรูปไม่ได้ พิมพ์เลขใต้บาร์โค้ดแทนได้"};return renderBar()}
-  try{const im=new Image();im.src=url;await im.decode();const det=new BarcodeDetector({formats:["ean_13","ean_8","upc_a","upc_e"]});const r=await det.detect(im);
-    if(!r.length)throw 0;barState.img=url;lookup(r[0].rawValue)}
-  catch(_){barState={img:url,error:"อ่านบาร์โค้ดไม่ได้ ลองถ่ายใกล้ขึ้นและให้แสงพอ หรือพิมพ์เลขแทน"};renderBar()}};
-$("barClose").onclick=()=>closePage("pgBar");
+  barLoop++;stopCam("barVideo");const url=URL.createObjectURL(f);barState={img:url,loading:true};renderBar();
+  try{const im=new Image();im.src=url;await im.decode();const dec=await makeDecoder();const code=await dec(im);
+    if(!code)throw new Error("อ่านบาร์โค้ดในรูปไม่ได้ ลองถ่ายใกล้ขึ้นให้เห็นเส้นชัด หรือพิมพ์เลขใต้บาร์โค้ดแทน");barState={img:url,code};lookup(code)}
+  catch(err){barState={img:url,error:err.message||"อ่านบาร์โค้ดไม่ได้"};renderBar()}};
+$("barClose").onclick=()=>{barLoop++;stopCam("barVideo");closePage("pgBar")};
 
 // ================= voice
 function voice(){
@@ -974,7 +1025,8 @@ $("statSeg").onclick=e=>{const b=e.target.closest("[data-s]");if(b){statTab=b.da
 $("editBtn").onclick=()=>openEdit();$("goalBtn").onclick=openGoal;
 $("pExtra").onclick=e=>{const b=e.target.closest("[data-extra]");if(b)openEdit({allergy:"eAllergy",disease:"eDisease",likes:"eLikes"}[b.dataset.extra])};
 $("clearSample").onclick=()=>{S={sample:false,profile:{...S.profile,name:"",allergy:"",disease:"",likes:"",tw:0},logs:{},weights:[],custom:[],ai:S.ai,remind:false};save();day=TODAY;render();startOnb()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){const open=[...document.querySelectorAll(".page")].filter(p=>!p.hidden).pop();if(open)closePage(open.id)}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){const open=[...document.querySelectorAll(".page")].filter(p=>!p.hidden).pop();if(open){if(open.id==="pgScan")return $("scClose").click();if(open.id==="pgBar")return $("barClose").click();closePage(open.id)}}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){barLoop++;stopCam("scVideo");stopCam("barVideo")}});
 
 if("serviceWorker" in navigator&&location.protocol==="https:"&&/github\.io$/.test(location.hostname)){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 show("today");remindCheck();
