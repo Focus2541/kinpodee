@@ -5,6 +5,7 @@
  *   GEMINI_API_KEY  (จำเป็น)  key จาก https://aistudio.google.com/apikey
  *   APP_TOKEN       (จำเป็น)  รหัสลับที่ตั้งเอง ต้องตรงกับที่กรอกในแอป
  *   MODEL           (ไม่บังคับ) ค่าเริ่มต้น gemini-flash-latest
+ *                   ถ้าโมเดลหลักคนใช้เยอะ (503/429) จะลองซ้ำ แล้วสลับไป gemini-flash-lite-latest ให้เอง
  *
  * Deploy → New deployment → Web app
  *   Execute as: Me   |   Who has access: Anyone
@@ -45,8 +46,6 @@ function analyze_(b64, mime, hint, props) {
   const fromText = !b64;
   const key = props.getProperty('GEMINI_API_KEY');
   if (!key) throw new Error('ยังไม่ได้ตั้ง GEMINI_API_KEY');
-  const model = props.getProperty('MODEL') || 'gemini-flash-latest';
-
   const prompt = fromText
     ? 'คุณเป็นนักโภชนาการไทย ผู้ใช้กินอาหาร/เครื่องดื่มชื่อ "' + hint + '" ' +
       'ประเมินค่าพลังงานและสารอาหารของ 1 ที่ตามขนาดที่ขายทั่วไปในประเทศไทย (เช่น เครื่องดื่มร้านกาแฟ 1 แก้ว 16 ออนซ์ หวานปกติ) ' +
@@ -90,19 +89,10 @@ function analyze_(b64, mime, hint, props) {
     }
   };
 
-  const res = UrlFetchApp.fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent',
-    {
-      method: 'post',
-      contentType: 'application/json',
-      headers: { 'x-goog-api-key': key },
-      payload: JSON.stringify(body),
-      muteHttpExceptions: true
-    }
-  );
-  const code = res.getResponseCode();
-  const data = JSON.parse(res.getContentText() || '{}');
+  const r = callGemini_(body, props);
+  const code = r.code, data = r.data;
   if (code !== 200) {
+    if (code === 503 || code === 429) throw new Error('AI มีคนใช้เยอะชั่วคราว ลองใหม่อีกครั้งใน 1–2 นาที');
     const msg = data.error && data.error.message ? data.error.message : 'HTTP ' + code;
     throw new Error('Gemini: ' + msg);
   }
@@ -122,6 +112,29 @@ function analyze_(b64, mime, hint, props) {
     };
   });
   return out;
+}
+
+/** เรียก Gemini: ลองโมเดลหลัก 2 ครั้ง ถ้ายังติด 503/429 สลับไปโมเดล lite */
+function callGemini_(body, props) {
+  const key = props.getProperty('GEMINI_API_KEY') || '';
+  const models = [props.getProperty('MODEL') || 'gemini-flash-latest', 'gemini-flash-lite-latest']
+    .filter(function (m, i, a) { return a.indexOf(m) === i; });
+  let last = { code: 0, data: {} };
+  for (let m = 0; m < models.length; m++) {
+    for (let attempt = 0; attempt < (m === 0 ? 2 : 1); attempt++) {
+      const res = UrlFetchApp.fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(models[m]) + ':generateContent',
+        { method: 'post', contentType: 'application/json', headers: { 'x-goog-api-key': key },
+          payload: JSON.stringify(body), muteHttpExceptions: true }
+      );
+      let data = {};
+      try { data = JSON.parse(res.getContentText() || '{}'); } catch (e) {}
+      last = { code: res.getResponseCode(), data: data, model: models[m] };
+      if (last.code !== 503 && last.code !== 429 && last.code !== 500) return last;
+      if (attempt === 0 && m === 0) Utilities.sleep(1500);
+    }
+  }
+  return last;
 }
 
 /** จำกัดไม่เกิน 30 ครั้ง/ชั่วโมง กันคนอื่นเอาไปใช้จนโควตาหมด */
@@ -144,15 +157,10 @@ function testSetup() {
   ['GEMINI_API_KEY', 'APP_TOKEN'].forEach(function (k) {
     Logger.log(k + ': ' + (props.getProperty(k) ? 'ตั้งแล้ว' : 'ยังไม่ได้ตั้ง'));
   });
-  const model = props.getProperty('MODEL') || 'gemini-flash-latest';
-  const res = UrlFetchApp.fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent',
-    {
-      method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-      headers: { 'x-goog-api-key': props.getProperty('GEMINI_API_KEY') || '' },
-      payload: JSON.stringify({ contents: [{ parts: [{ text: 'ตอบคำว่า พร้อม' }] }] })
-    }
-  );
-  Logger.log('Gemini (' + model + '): HTTP ' + res.getResponseCode());
-  Logger.log(res.getContentText().slice(0, 300));
+  const r = callGemini_({ contents: [{ parts: [{ text: 'ตอบคำว่า พร้อม' }] }] }, props);
+  Logger.log('Gemini (' + r.model + '): HTTP ' + r.code);
+  Logger.log(JSON.stringify(r.data).slice(0, 300));
+  if (r.code === 200) Logger.log('✅ พร้อมใช้งาน ไปขั้น Deploy ต่อได้เลย');
+  else if (r.code === 503 || r.code === 429) Logger.log('⏳ key ใช้ได้ แต่โมเดลมีคนใช้เยอะชั่วคราว ไปขั้น Deploy ต่อได้เลย หรือรอสักครู่แล้วกด Run ใหม่');
+  else if (r.code === 400 || r.code === 403) Logger.log('❌ key ไม่ถูกต้อง ตรวจ GEMINI_API_KEY อีกครั้ง');
 }
